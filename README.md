@@ -4,6 +4,8 @@
 
 Web app to create, save and manage passwords.
 
+Programmed in HTML, CSS, JavaScript and PHP.
+
 I used XAMPP (a virtual machine web server) to host the files while I made it.
 
 ## Features

@@ -1,0 +1,351 @@
+/* Import Roboto font (font-weight 300 and 500)*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+/* General CSS */
+
+body,h1,h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+body {
+  margin: 50px;
+}
+
+p {
+  font-size: 16px;
+  display: inline;
+}
+
+p.block {
+  display: block;
+}
+
+p.display_pw,h3.display_title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+p#warning {
+  color: red;
+}
+
+h1 {
+  font-size: 48px;
+  float:left;
+}
+
+h1.login {
+  float: none;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+div.rounded {
+  border-radius: 25px;
+  border: 1px solid #000000;
+  padding: 20px;
+}
+
+/* Label CSS for checkboxes */
+
+label {
+  display: inline-block; /* Rule for all labels */
+}
+
+label.add {
+  width: 130px;
+}
+
+label.search {
+  width: 160px;
+}
+
+label.master {
+  width:200px;
+}
+
+/* Div CSS for positioning the footer at the bottom of the page */
+
+div.page-container {
+  position: relative;
+  min-height: 640px;
+}
+
+div.content-wrap {
+  padding-bottom: 50px;    /* Footer height */
+  margin: auto;
+  width: 60%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;            /* Footer height */
+}
+
+/* Password display box CSS */
+
+input[type="text"] {
+  width: 80%;
+  padding: 12px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+input#passwordOutput {
+  width:80%;
+  padding: 12px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 32px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+input[type="password"] {
+  width:80%;
+  padding: 12px 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+/* Button CSS */
+
+input[type="button"],input[type="submit"] {
+  padding: 8px 8px;
+  margin: 4px 4px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #000000; /* Black */
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size:16px;
+  transition-duration: 0.4s;
+}
+
+input[type="button"]:hover,input[type="submit"]:hover {
+  background-color: #2196F3; /* Blue */
+  color: white;
+}
+
+input[type="button"]#logout_button {
+  float: right;
+  margin: 10px;
+}
+
+input.display_pw {
+  width: 60%;
+  padding: 6px 6px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  cursor: default;
+}
+
+/* Navigation bar CSS */
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-width: 2px;
+  clear: both;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, li a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+/* Slider CSS */
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
+
+/* Checkbox styling
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #d3d3d3;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/* Media Queries */

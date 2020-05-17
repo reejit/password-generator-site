@@ -17,7 +17,7 @@ The master password is stored in the file password_hash.txt and hashed using SHA
 The master password can be changed on the login page, and this will cause all of the passwords in the database to be re-encrypted with the new master password.
 
 ### Managing passwords
-So far, passwords can be deleted. In future versions I might add an edit feature. 
+Passwords can be edited and deleted.
 When the passwords are displayed there are individual buttons to copy the username and password.
 The user can search through saved passwords by their name.
 

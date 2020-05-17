@@ -12,6 +12,7 @@
   if (!isset($_SESSION['valid'])) {
     header("Location: ../index.php");
   }
+
 ?>
 
 <!-- JavaScript for popup message -->

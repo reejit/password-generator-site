@@ -38,5 +38,5 @@ Comes with a page where you can manually add a password with a name and/or usern
 
 The app comes with the default password "password", which can be changed on the login page. 
 
-## Database
+### Database
 The passwordmanager.sql file is an SQL dump file so that you can import the database into your web server.

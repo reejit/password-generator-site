@@ -29,6 +29,7 @@ Comes with a page to generate passwords. Options include:
   * Lower case
   * Numbers
   * Symbols
+  
 When a password is generated, the user can copy it, clear it or save it. Saving it allows you to save the password with a name and/or a username. Passwords saved without usernames will display "No username set" when displayed.
 
 ### Adding passwords

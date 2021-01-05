@@ -1,63 +1,60 @@
 <!DOCTYPE html>
-<?php
-  session_start(); // Start PHP session
-
-  // Redirects the user to the login page if they aren't logged in
-  if (!isset($_SESSION['valid'])) {
-    header("Location: index.php");
-  }
-?>
+<?php require "PHP\header.php" ?>
 <html>
 
   <head>
     <title>Add Password</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/theme.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <div class="page-container">
-      <div class="content-wrap">
+    <div class="content-wrap">
 
-        <h1>Add Password</h1>
-        <input type="button" value="Log out" id="logout_button">
+      <!-- Logout button -->
+      <input type="button" value="Log out" id="logout_button">
+      <h1>Add Password</h1>
 
-        <!-- Navigation bar -->
-        <ul>
-          <li><a href="saved_passwords.php">Saved passwords</a></li>
-          <li><a href="generator.php">Password Generator</a></li>
-          <li><a class="active" href="add_password.php">Add Password</a></li>
-        </ul><br>
+      <!-- Navigation bar -->
+      <div class="nav" id="navbar">
+        <a href="saved_passwords.php">Saved passwords</a>
+        <a href="generator.php">Password Generator</a>
+        <a class="active" href="add_password.php">Add Password</a>
+        <a href="account_details.php">Account Details</a>
+        <a href="javascript:void(0);" class="icon" onclick="nav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div><br>
 
-        <h2>Enter new password:</h2>
+      <h2>Enter new password:</h2>
+      <p class="required">* Required fields</p>
 
-        <!-- Form to add new password to database -->
-        <form action="" method="post">
-          <!-- Name -->
-          <label class="add">Name:</label>
-          <input type="text" name="name" autocomplete="save-password-name" autofocus required><br>
+      <!-- Form to add new password to database -->
+      <form action="" method="post">
+        <!-- Name -->
+        <label class="add">Name: <p class="required">*</p></label>
+        <input type="text" name="name" autocomplete="save-password-name" autofocus required><br>
 
-          <!-- Username -->
-          <label class="add">Username/email:</label>
-          <input type="text" name="username" autocomplete="save-password-username"><br>
+        <!-- Username -->
+        <label class="add">Username/email:</label>
+        <input type="text" name="username" autocomplete="save-password-username"><br>
 
-          <!-- Password -->
-          <label class="add">Password:</label>
-          <input type="password" name="password" autocomplete="off" required><br>
+        <!-- URL -->
+        <label class="add">URL:</label>
+        <input type="url" name="url" pattern="https?://.+" autocomplete="save-password-url" oninvalid="this.setCustomValidity('Please enter a valid URL (must start with https://)')"><br>
 
-          <!-- Submit button -->
-          <input type="submit" name="submit" value="Add">
-        </form>
+        <!-- Password -->
+        <label class="add">Password: <p class="required">*</p></label>
+        <input type="password" name="password" autocomplete="off" required><br>
 
-        <?php
-          // PHP code to add the password to the database
+        <!-- Submit button -->
+        <input type="submit" name="submit" value="Add">
+      </form>
 
-          require "PHP/connect_db.php"; // Connects to database
-          include "PHP/add.php"; // Adds the password
+      <?php include "PHP/add.php"; // Adds the password ?>
 
-        ?>
-
-      </div>
     </div>
 
     <!-- External JavaScript -->

@@ -2,7 +2,7 @@
 <?php
   session_start(); // Start PHP session
 
-  // Redirects the user to the saved passwords page if they are already logged in
+  // Redirects the user if they are already logged in
   if (isset($_SESSION['valid'])) {
     header("Location: saved_passwords.php");
   }
@@ -10,102 +10,100 @@
 <html>
 
   <head>
-    <title>Login page</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/theme.js" type="text/javascript"></script>
   </head>
 
   <body>
-  <div class="page-container">
     <div class="content-wrap">
 
-      <h1 class="login">Login page</h1>
+      <h1>Log in</h1>
 
       <!-- Master password form -->
-      <form action = "" method="post" id="master_login">
+      <form style="clear: both;" action = "" method="post" id="master_login">
+        <!-- Username -->
+        <input id="username" type="text" name="username" placeholder="Enter username" autofocus>
+
         <!-- Master password -->
         <input id="password" type="password" name="master_password" placeholder="Enter master password" autofocus>
 
         <!-- Submit button -->
-        <input type="submit" name="login" value="Login">
+        <input type="submit" name="login" value="Log in">
       </form>
 
-      <input type="button" onclick="(function(){ document.getElementById('change_form').style.display = 'block'; })()" name="change_password" value="Change master password">
-
-      <!-- Change master password form -->
-      <br><form action = "" method="post" id="change_form" style="display:none;">
-        <!-- Master password -->
-        <label class="master">Current master password:</label>
-        <input id="password" type="password" name="master_password" autofocus required><br>
-
-        <!-- New password -->
-        <label class="master">New password:</label>
-        <input id="new_password" type="password" name="new_password" required><br>
-
-        <!-- Confirm new password -->
-        <label class="master">Confirm new password:</label>
-        <input id="confirm_new_password" type="password" name="confirm_new_password" required><p id="not_matching" style="color:red;"></p><br>
-
-        <!-- Submit button -->
-        <input type="submit" name="change_password" value="Change password">
-      </form>
-
-      <script>
-
-        document.getElementById('confirm_new_password').addEventListener('keyup', function(event) {
-          if (!(document.getElementById('new_password').value === document.getElementById('confirm_new_password').value) ) {
-            document.getElementById('not_matching').innerHTML = " Passwords don't match";
-          } else {
-            document.getElementById('not_matching').innerHTML = "";
-          }
-        });
-
-      </script>
+      <!-- Link to register -->
+      <br><label>Not got an account?</label><br><br><a href="register.php"><input type="button" name="register" id="register_button" value="Register"></a>
 
       <?php
 
-        include "PHP/login.php"; // Login PHP
+      // PHP code for checking the master password (logging in)
 
-        if (isset($_POST['change_password'])) {
+      require "PHP/connect_db.php";
 
-          // Get variables from form
-          $master_password = $_POST["master_password"];
-          $new_password = $_POST["new_password"];
-          $confirm_new_password = $_POST["confirm_new_password"];
+      error_reporting(0); // Turns off error reporting
 
-          // Password hash. Password is hashed so that it is not stored in plain text
-          $password_hash = rtrim(file_get_contents("password_hash.txt"));
+      // If the login button is pressed and the password field isn't empty, verify password
+      if (isset($_POST['login']) && !empty($_POST['master_password'])) {
 
-          // Hash password from form
-          $attempt_hash = hash("sha256",$master_password);
+        // Lookup username in database
+        $sql = $mysqli->prepare("SELECT masterPass,userID,username FROM Users WHERE username = ?");
+        $sql->bind_param("s", $username);
+
+        // Get username and password from form
+        $username = $_POST["username"];
+
+        // Execute
+        $sql->execute();
+
+        $result = $sql->get_result();
+        $row = $result->fetch_assoc();
+
+        // Check if that username is in the database
+        if ($row) {
+
+          // Get password attempt
+          $password = $_POST["master_password"];
+
+          // Hash password from username
+          $attempt_hash = hash("sha256",$password);
+
+          // Get password hash from database
+          $password_hash = $row["masterPass"];
 
           // Compare hashes
           if ($attempt_hash == $password_hash) {
-            if ($new_password == $confirm_new_password) {
-              $new_hashed = hash("sha256",$new_password);
-              $file = fopen("password_hash.txt","w");
-              fwrite($file, $new_hashed);
-              fclose($file);
 
-              include "PHP/update_encryption.php";
+            // The hashes match, so the password is correct
+            $_SESSION['valid'] = true; // Sets the $_SESSION['valid'] variable (logs user in)
+            $_SESSION['timeout'] = time();
+            $_SESSION['userID'] = $row["userID"];
+            $_SESSION['username'] = $row["username"];
 
-            } else {
-              // Display passwords don't match message
-              $message = "Passwords don't match. Password not changed";
-              include "PHP/popup_message.php";
-            }
+            header('Refresh: 0;'); // Refreshes the page
+
+          } else {
+            // Password is incorrect
+            // Display password incorrect message
+
+            $message = "Password incorrect!";
+            include "PHP/popup_message.php";
+
+          }
 
         } else {
-          // Display master password incorrect message
-          $message = "Master password incorrect! Password not changed";
+          // Username is not found
+          // Display username not found message
+
+          $message = "Username not found!";
           include "PHP/popup_message.php";
+
         }
 
       }
 
       ?>
-
-      </div>
     </div>
   </body>
 </html>

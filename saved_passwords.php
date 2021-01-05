@@ -1,92 +1,95 @@
 <!DOCTYPE html>
-<?php
-  session_start(); // Start PHP session
-
-  // Redirects the user to the login page if they aren't logged in
-  if (!isset($_SESSION['valid'])) {
-    header("Location: index.php");
-  }
-?>
+<?php require "PHP/header.php" ?>
 <html>
 
   <head>
     <title>Saved Passwords</title>
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/theme.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <div class="page-container">
-      <div class="content-wrap">
+    <div class="content-wrap">
+      <!-- Logout button -->
+      <input type="button" value="Log out" id="logout_button">
+      <h1>Saved Passwords</h1>
 
-        <h1>Saved passwords</h1>
-        <input type="button" value="Log out" id="logout_button">
+      <!-- Navigation bar -->
+      <div class="nav" id="navbar">
+        <a class="active" href="saved_passwords.php">Saved passwords</a>
+        <a href="generator.php">Password Generator</a>
+        <a href="add_password.php">Add Password</a>
+        <a href="account_details.php">Account Details</a>
+        <a href="javascript:void(0);" class="icon" onclick="nav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div><br>
 
-        <!-- Navigation bar -->
-        <ul>
-          <li><a class="active" href="saved_passwords.php">Saved passwords</a></li>
-          <li><a href="generator.php">Password Generator</a></li>
-          <li><a href="add_password.php">Add Password</a></li>
-        </ul><br>
+      <!-- Search box -->
+      <form action="" method="post" id="search_form">
+        <input type="text" name="keyword" id="search" placeholder="Search passwords" required>
+        <input type="submit" name="submit_search" value="Search">
+      </form>
 
-        <form action="" method="post" id="search_form">
-          <input type="text" name="keyword" id="search" placeholder="Search passwords">
-          <input type="submit" name="submit_search" value="Search">
-        </form>
+      <?php
+      require "PHP/connect_db.php"; // Connects to database
 
-        <?php
+      // If the submit button is pressed and the search box isn't empty, search for keyword
+      if(isset($_POST['submit_search'])) {
 
-          // If the submit button is pressed and the search box isn't empty, search for keyword
-          if(isset($_POST['submit_search']) && !empty($_POST['keyword'])){
+        // Search database
+        $sql = $mysqli->prepare("SELECT passID, name, username, url, password FROM passwords WHERE name LIKE ? AND userID = ?");
+        $sql->bind_param("si", $form_search, $userID);
 
-            require "PHP/connect_db.php"; // Connects to database
+        // Gets keyword from form and userID
+        $form_search = '%' . $_POST["keyword"] . '%';
+        $userID = $_SESSION["userID"];
 
-            // Gets keyword from form
-            $form_search = $_POST["keyword"];
-            $form_search = filter_var($form_search, FILTER_SANITIZE_STRING);
+        // Execute
+        $sql->execute();
+        $result = $sql->get_result();
 
-            // Search database
-            $sql = "SELECT id, name, username, password FROM passwords WHERE name LIKE '%" . $form_search . "%'";
-            $result = $mysqli->query($sql);
+        // Displays title with the current search
+        echo '<h2>Search results for "' . $_POST["keyword"] . '"</h2>'; // Creates title
 
-            // Displays title with the current search
-            echo '<h2>Search results for "' . $form_search . '"</h2>'; // Creates title
+        // Displays the number of results found
+        if ($result->num_rows == 1) {
+          echo '<p>1 result found</p><br>';
+        } else {
+          echo '<p>' . $result->num_rows . ' results found</p><br>';
+        }
 
-            // Displays the number of results found
-            if ($result->num_rows == 1) {
-              echo '<p>1 result found</p><br><br>';
-            } else {
-              echo '<p>' . $result->num_rows . ' results found</p><br><br>';
-            }
+        $display_search = true;
+        include "PHP/display.php"; // Display result of SQL query
 
-            $display_search = true;
-            include "PHP/display.php"; // Display result of SQL query
+      }
 
-          }
+      // Display passwords
+      $sql = $mysqli->prepare("SELECT passID, name, username, url, password FROM passwords WHERE userID = ?");
+      $sql->bind_param("i", $userID);
 
-          require "PHP/connect_db.php"; // Connects to database
+      // Get parameters
+      $userID = $_SESSION["userID"];
 
-          // Display passwords
-          $sql = "SELECT id, name, username, password FROM passwords";
-          $result = $mysqli->query($sql);
+      // Execute
+      $sql->execute();
+      $result = $sql->get_result();
 
-          echo "<h2>All passwords</h2>"; // Creates title
+      echo "<h2>All passwords</h2>"; // Creates title
 
-          // Displays the number of saved passwords
-          if ($result->num_rows == 1) {
-            echo '<p>You have 1 saved password</p><br><br>';
-          } else {
-            echo '<p>You have ' . $result->num_rows . ' saved passwords</p><br><br>';
-          }
+      // Displays the number of saved passwords
+      if ($result->num_rows == 1) {
+        echo '<p>You have 1 saved password</p><br>';
+      } else {
+        echo '<p>You have ' . $result->num_rows . ' saved passwords</p><br>';
+      }
 
-          $display_search = false;
-          include "PHP/display.php"; // Display passwords
+      $display_search = false;
+      include "PHP/display.php"; // Display passwords
 
-          $mysqli->close(); // Close connection to database
-
-        ?>
-
-      </div>
+      ?>
     </div>
 
     <!-- External JavasScript -->

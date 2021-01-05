@@ -1,48 +1,68 @@
-/* Import Roboto font (font-weight 300 and 500)*/
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+/* Import Roboto font (font-weight 400 and 500)*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
 
 /* General CSS */
 
-body,h1,h2 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+html {
+  background-color: white;
 }
 
+/* Dark mode */
+.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Dark mode */
+.invert {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Set font and font weight */
+body,h1,h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+/* Position the content of the screen */
 body {
   margin: 50px;
 }
 
-p {
+/* Changes <p> to display inline */
+p.inline {
   font-size: 16px;
   display: inline;
 }
 
-p.block {
-  display: block;
-}
-
 p.display_pw,h3.display_title {
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
   font-size: 24px;
+  margin: auto;
 }
 
+/* Warning */
 p#warning {
   color: red;
 }
 
+/* p styling for required field text */
+p.required {
+  color: red;
+  display: inline;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* h1 styling */
 h1 {
   font-size: 48px;
+  width: auto;
   float:left;
 }
 
-h1.login {
-  float: none;
-}
-
 h2 {
-  text-decoration: underline;
+  font-weight: 500;
 }
 
 div.rounded {
@@ -51,7 +71,7 @@ div.rounded {
   padding: 20px;
 }
 
-/* Label CSS for checkboxes */
+/* Label styling */
 
 label {
   display: inline-block; /* Rule for all labels */
@@ -61,95 +81,83 @@ label.add {
   width: 130px;
 }
 
+label.display {
+  width: 110px;
+}
+
+label.details,label.master {
+  width: 200px;
+}
+
 label.search {
   width: 160px;
 }
 
-label.master {
-  width:200px;
+label.spaced {
+  margin: 10px;
 }
 
-/* Div CSS for positioning the footer at the bottom of the page */
-
-div.page-container {
-  position: relative;
-  min-height: 640px;
-}
+/* Styling for rounded content div */
 
 div.content-wrap {
-  padding-bottom: 50px;    /* Footer height */
+  padding: 20px;
   margin: auto;
-  width: 60%;
+  width: 80%;
   border-width: 1px;
   border-style: solid;
-  padding: 20px;
   border-radius: 25px;
+  display: block;
+  position: relative;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;            /* Footer height */
-}
+/* Input styles */
 
-/* Password display box CSS */
-
-input[type="text"] {
+input[type="text"],input[type="password"],input[type="url"] {
   width: 80%;
   padding: 12px 12px;
   margin: 8px 0;
   box-sizing: border-box;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
 }
 
+/* Password output from generator */
 input#passwordOutput {
-  width:80%;
+  width: 80%;
   padding: 12px 12px;
   margin: 8px 0;
   box-sizing: border-box;
   font-size: 32px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-}
-
-input[type="password"] {
-  width:80%;
-  padding: 12px 12px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
 }
 
 /* Button CSS */
 
-input[type="button"],input[type="submit"] {
-  padding: 8px 8px;
-  margin: 4px 4px;
-  cursor: pointer;
-  background-color: white;
-  color: black;
-  border: 2px solid #000000; /* Black */
-  border-radius: 6px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size:16px;
-  transition-duration: 0.4s;
-}
+  /* Buttons */
+  input[type="button"],input[type="submit"] {
+    padding: 8px 8px;
+    margin: 4px 4px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #000000; /* Black */
+    border-radius: 6px;
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+    transition-duration: 0.4s;
+  }
 
-input[type="button"]:hover,input[type="submit"]:hover {
-  background-color: #2196F3; /* Blue */
-  color: white;
-}
+  /* Hovering */
+  input[type="button"]:hover,input[type="submit"]:hover {
+    background-color: #2196F3; /* Blue */
+    color: white;
+  }
 
-input[type="button"]#logout_button {
-  float: right;
-  margin: 10px;
-}
+  /* Logout button */
+  input[type="button"]#logout_button {
+    float: right;
+    margin: 10px;
+  }
+
+/* Display saved passwords styling */
 
 input.display_pw {
   width: 60%;
@@ -158,233 +166,375 @@ input.display_pw {
   box-sizing: border-box;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
   cursor: default;
 }
 
-/* Navigation bar CSS */
+/* Navigation Bar CSS */
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #FFFFFF;
-  border-style: solid;
-  border-width: 2px;
-  clear: both;
-}
+  .nav {
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-width: 2px;
+    clear: both;
+  }
 
-li {
-  float: left;
-}
+  .nav a {
+    float: left;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
 
-li a {
-  display: inline-block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+  .nav a:hover, a.active {
+    background-color: #2196F3;
+    color: white;
+  }
 
-li a:hover, li a.active {
-  background-color: #2196F3;
-  color: white;
-}
+  /* Hide the icon that should open and close the nav on mobile */
+  .nav .icon {
+    display: none;
+  }
 
-/* Slider CSS */
+/* Length slider CSS */
 
-.slidecontainer {
-  width: 100%;
-}
+  .slidecontainer {
+    width: 100%;
+  }
 
-.slider {
-  -webkit-appearance: none;
-  width: 80%;
-  height: 10px;
-  border-radius: 5px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
+  .slider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
 
-.slider:hover {
-  opacity: 1;
-}
+  .slider:hover {
+    opacity: 1;
+  }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #000000;
-  cursor: pointer;
-}
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+  }
 
-.slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #000000;
-  cursor: pointer;
-}
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+  }
 
 /* Checkbox styling
 
-/* Customize the label (the container) */
-.container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  /* Customize the label */
+  .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-/* Hide the browser's default checkbox */
-.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
+  /* Hide the default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
 
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
+  /* Create a checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #d3d3d3;
+  }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #d3d3d3;
-}
+  /* On mouse-over, set grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #a9a9a9;
+  }
 
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
+  /* When checked, set blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
 
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
 
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
-/* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar {
-  visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #333; /* Black background color */
-  color: #fff; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 2px; /* Rounded borders */
-  padding: 16px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
-  bottom: 30px; /* 30px from the bottom */
-}
+/* Popup messages CSS */
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show {
-  visibility: visible; /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
+  /* Position popup at the bottom and in the middle of the screen */
+  #popup {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed; /* Sit on top of the screen */
+    left: 50%; /* Center the popup */
+    bottom: 30px; /* 30px from the bottom */
+  }
 
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
+  /* Show the popup */
+  #popup.show {
+    visibility: visible;
+    /* Add animation */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
 
-@keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
+  /* Animations to fade the popup in and out */
 
-@-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
 
-@keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
 
-/* Modal CSS */
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 200px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
 
-/* Modal Content */
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
 
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-}
+/* Edit UI CSS */
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+  /* The Edit UI (background) */
+  .edit {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 150px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+  /* Edit UI Content */
+
+  .edit-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 30%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+/* Dark theme toggle CSS */
+
+  /* The box around the toggle */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* Toggle styling */
+  .toggle {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .toggle:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  /* Changes the colour when the toggle is on */
+  input:checked + .toggle {
+    background-color: #2196F3;
+  }
+
+  input:focus + .toggle {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  /* Animation */
+  input:checked + .toggle:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    border-radius: 50%;
+  }
+
+/* Media Queries */
+
+  /* Media Query - mobile layout */
+  @media only screen and (max-width: 768px) {
+    /* Removes the rounded box around the content */
+    div.content-wrap {
+      width: auto;
+      border-style: none;
+    }
+
+    /* Makes content take up the whole page */
+    body {
+      margin: 5px;
+    }
+
+    /* Makes the input boxes take up the full width of the screen */
+    input[type="text"],input#passwordOutput,input[type="password"],input[type="url"] {
+      width: 100%;
+    }
+
+    /* Changes the box around saved passwords to just a line separator */
+    div.rounded {
+      border: none;
+      border-radius: 0px;
+      border-top: 1px solid #000000;
+      padding: 20px 0px 0px 0px;
+    }
+
+    /* Changes the edit UI to take up more of the screen */
+    .edit-content {
+      width: 90%;
+    }
+
+    /* Mobile navigation styling */
+    .nav a:not(.active) {display: none;}
+    .nav a.icon {
+      float: right;
+      display: block;
+    }
+    .nav.responsive {position: relative;}
+    .nav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .nav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+    input[type="button"],input[type="submit"] {
+      margin: 5px 0px 10px 0px;
+    }
+
+  }
+
+  /* Media Query - print layout */
+  @media print {
+    /* Removes the rounded box around the content */
+    div.content-wrap {
+      width: auto;
+      border-style: none;
+    }
+
+    /* Makes content take up the whole page */
+    body {
+      margin: 5px;
+    }
+
+    /* Hides the logout button */
+    input[type="button"]#logout_button {
+      display: none;
+    }
+
+    /* Overrides dark mode so that it is white for printing */
+    .dark-mode {
+      filter: invert(0) hue-rotate(0deg);
+    }
+  }

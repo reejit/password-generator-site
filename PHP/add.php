@@ -1,42 +1,35 @@
 <?php
   // PHP to add a password to the database
 
-  error_reporting(0); // Turn of error repoprting
-
-  // Redirects the user to the login page if they aren't logged in
-  if (!isset($_SESSION['valid'])) {
-    header("Location: ../index.php");
-  }
+  require "PHP/connect_db.php"; // Connects to database
+  require "PHP/header.php"; // Get header.php content
 
   // If the form is submitted, save the password
   if(isset($_POST["submit"])){
 
-    if (!empty($_POST["name"]) && !empty($_POST["password"])) {
+    // SQL to insert into database
+    $sql = $mysqli->prepare("INSERT INTO passwords (name,username,url,password,userID) VALUES (?, ?, ?, ?, ?)");
+    $sql->bind_param("ssssi", $new_name, $new_username, $new_url, $encrypted_pass, $userID);
 
-      // Get name and password from form
-      $new_name = $_POST["name"];
-      $new_username = $_POST["username"];
-      $new_password = $_POST["password"];
+    // Get parameters
 
-      // Prevent special characters disturbing SQL
-      $new_name = filter_var($new_name, FILTER_SANITIZE_STRING);
-      $new_username = filter_var($new_username, FILTER_SANITIZE_STRING);
+    // Get name and password from form
+    $new_name = $_POST["name"];
+    $new_username = $_POST["username"];
+    $new_url = $_POST["url"];
+    $new_password = $_POST["password"];
+    $userID = $_SESSION["userID"];
 
-      // Encrypt the password before saving to database
-      $encrypted_pass = include "PHP/encrypt.php";
+    // Encrypt the password before saving to database
+    $encrypted_pass = include "PHP/encrypt.php";
 
-      // SQL to insert into database
-      $sql = "INSERT INTO passwords (id,name,username,password) VALUES(NULL,'$new_name','$new_username','$encrypted_pass')";
-      $result = $mysqli->query($sql) or die(mysqli_error($mysqli));
+    // Execute
+    $sql->execute();
 
-      // Create popup message: "Password added!"
-      $message = "Password added!";
-      include "PHP/popup_message.php";
+    // Password added message
+    $message = "Password added!";
+    include "PHP/popup_message.php";
 
-    } else {
-      // Create popup message: "Please fill out all fields"
-      $message = "Please fill out all fields";
-      include "PHP/popup_message.php";
-    }
   }
+  
 ?>

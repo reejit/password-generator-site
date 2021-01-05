@@ -1,23 +1,18 @@
 <?php
   // SQL to delte password from database
-  
-  error_reporting(0); // Turn of error repoprting
 
-  // Redirects the user to the login page if they aren't logged in
-  if (!isset($_SESSION['valid'])) {
-    header("Location: ../index.php");
-  }
-
+  require "header.php"; // Get header.php content
   require "connect_db.php"; // Connects to the database
+
+  // Execute SQL
+  $sql = $mysqli->prepare("DELETE FROM passwords WHERE passID=?");
+  $sql->bind_param("i", $delete_id);
 
   // Get password to delete
   $delete_id = $_GET["delete-id"];
 
-  // Execute SQL
-  $sql = "DELETE FROM passwords WHERE id=$delete_id";
-  $result = $mysqli->query($sql) or die(mysqli_error($mysqli));
+  $sql->execute();
 
   // Redirect back to the saved passwords page
   header("Location: ../saved_passwords.php")
-
 ?>

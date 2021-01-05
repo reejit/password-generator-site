@@ -1,12 +1,6 @@
 <?php
   // PHP code for connecting database
-
   error_reporting(0); // Turn of error repoprting
-
-  // Redirects the user to the login page if they aren't logged in
-  if (!isset($_SESSION['valid'])) {
-    header("Location: ../index.php");
-  }
 
   // variables to connect
   $host =  "localhost";
@@ -16,4 +10,9 @@
 
   // create a database connection instance
   $mysqli = new mysqli($host, $username, $password, $database);
+
+  // Check connection
+  if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+  }
 ?>
